@@ -1,13 +1,18 @@
 import React from "react"
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from "react-redux"
-import { deleteTodo, startEditTodo, completeTodo } from "../redux/slice/todo-slice";
+import { deleteTodo, startEditTodo, completeTodo, setIsEdit } from "../redux/slice/todo-slice";
+import editIcon from '../assets/edit.png';
+import deleteIcon from '../assets/delete.png'
 
 export default function Item (props) {
     const dispatch = useDispatch();
-    const editedTodo = useSelector((state) =>  state.todos.todos.find((todo) => todo.id === props.id))
+    const editedTodo = useSelector((state) =>  state.todos.todos.find((todo) => todo.id === props.id));
+    const isEdit = useSelector((state) => state.todos.edit.isEdit)
+
     const handleDeleteTodo = (id) => {
-        dispatch(deleteTodo(id))
+        dispatch(deleteTodo(id));
+        dispatch(setIsEdit(false));
     }
     const handleEditTodo = (id, value) => {
         dispatch(startEditTodo({ id, value }));
@@ -28,8 +33,8 @@ export default function Item (props) {
                     textDecorationThicakness: props.completed ? '3px' : 'initial',
                     }}>{editedTodo ? editedTodo.value : props.value}</p>
                 <div className="icon-items flex justify-end flex-grow mr-4">
-                    <button onClick={() => handleEditTodo (props.id, props.value)}><i className="material-icons mr-4" style={{display: props.completed ? 'none' : 'block'}}>edit</i></button>
-                    <button onClick={() => handleDeleteTodo(props.id)}><i className="material-icons">delete</i></button>
+                    <button onClick={() => handleEditTodo (props.id, props.value)}><img src={editIcon} className="mr-4 w-10" style={{display: props.completed ? 'none' : 'block'}}/></button>
+                    <button onClick={() => handleDeleteTodo(props.id)}><img src={deleteIcon} className="w-8" style={{ display: isEdit ? 'none' : 'block' }}/></button>
                 </div>
             </div>
         </div>

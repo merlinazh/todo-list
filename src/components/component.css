@@ -18,12 +18,10 @@
     background-color: #FFFAF0;
     color: black;
 }
-.item-todo button i {
-    font-size: 2.5em;
+.item-todo button img {
     transition: transform 0.1s ease-in-out
 }
-.item-todo button i:hover {
-    font-size: 2.5em;
+.item-todo button img:hover {
     transform: scale(1.1)
 }
 .item-todo p{

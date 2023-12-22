@@ -21,13 +21,12 @@ export default function TodoList(){
 
     return (
         <div>
-            <Form text="What’s the plan for today?" inputType="text" placeholder="What to do" inputValue=''></Form>  
+            <Form text="What’s the plan for today?" inputType="text" placeholder="What to do" inputValue='' maxLength={20}></Form>  
             <div className="todo-list mt-7 ">
                 <Filter setFilter={setFilter}></Filter>
                 {filterTodos.map(todo => (
                     <Item key={todo.id} id={todo.id} value={todo.value} completed={todo.completed}></Item>
                 ))}
-                
             </div>
         </div>
     )

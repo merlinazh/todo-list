@@ -9,6 +9,7 @@ const todoSlice = createSlice({
       value: '',
       isEdit: false,
     },
+    inputValue: '',
   },
   reducers: {
     addTodo(state, action) {
@@ -18,7 +19,7 @@ const todoSlice = createSlice({
         value,
         completed: false,
       }
-      state.todos = [...state.todos, newTodo]
+      state.todos = [...state.todos, newTodo];
     },
     deleteTodo(state, action) {
       const { payload } = action;
@@ -44,6 +45,9 @@ const todoSlice = createSlice({
         state.edit.value = '';
       }
     },
+    setIsEdit(state, action) {
+      state.edit.isEdit = action.payload;
+    },
     cancelEdit(state){
       state.edit.id = null;
       state.edit.value = '';
@@ -56,8 +60,14 @@ const todoSlice = createSlice({
         todoComplete.completed = !todoComplete.completed;
       }
     },
+    inputLength(state, action) {
+      state.inputLength = action.payload;
+    },
+    setInputValue(state, action) {
+      state.inputValue = action.payload;
+    }
   },
 });
 
-export const { addTodo, deleteTodo, editTodo, startEditTodo, finishEditTodo, cancelEdit, completeTodo } = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo, startEditTodo, finishEditTodo, setIsEdit, cancelEdit, completeTodo, inputLength, setInputValue } = todoSlice.actions;
 export default todoSlice.reducer;

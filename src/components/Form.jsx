@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { addTodo, editTodo, cancelEdit, finishEditTodo } from '../redux/slice/todo-slice'
+import { addTodo, editTodo, cancelEdit, setIsEdit, finishEditTodo, inputLength, setInputValue } from '../redux/slice/todo-slice'
 import './component.css'
 
 export default function Form (props){
     const dispatch = useDispatch();
     const { id, value, isEdit } = useSelector((state) => state.todos.edit);
+    const lengthInput = useSelector((state) => state.todos.inputLength) || 0;
 
     const addTodos = (event) => {
         event.preventDefault();
@@ -21,6 +22,7 @@ export default function Form (props){
                 dispatch(addTodo({ value: inputTodo }));
             }
             event.target.reset();
+            dispatch(inputLength(0));
         }else{
             alert('Input cannot be empty')
         }
@@ -28,13 +30,23 @@ export default function Form (props){
 
     const handleCancelEdit = () => {
         dispatch(cancelEdit());
+        dispatch(setIsEdit(false));
+        dispatch(setInputValue(''));
+    }
+
+    const handleInputLength = (event) => {
+        const inputText = event.target.value;
+        dispatch(inputLength(inputText.length))
     }
     return (
         <>
             <div className="todo text-center mt-16 mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
                 <h1 className='text-4xl'>{props.text}</h1>
                 <form onSubmit={addTodos} className='flex justify-center mt-5 text-xl'>
-                    <input type={props.inputType} name='todoInput' className="input-todo block w-full p-2" placeholder={props.placeholder} defaultValue={isEdit? value: props.inputValue} />
+                    <input type={props.inputType} name='todoInput' className="input-todo block w-full p-2" 
+                    placeholder={props.placeholder} defaultValue={isEdit ? value : props.inputValue}
+                    onChange={handleInputLength}
+                    maxLength={20} />
                     {isEdit ? (
                         <div className='button-edit flex'>
                             <button type='submit' className='btn-todo bg-black text-white p-2 ml-2 px-5'>Edit</button>
@@ -45,10 +57,11 @@ export default function Form (props){
                     )}
                     
                 </form>
+                <div className='text-left text-sm text-gray-500 pt-2'>
+                    <p>{lengthInput}/{props.maxLength}</p> 
+                </div>
             </div>
         </>
-        
-        
     )
 }
 
@@ -57,4 +70,5 @@ Form.propTypes = {
     text: PropTypes.string,
     placeholder: PropTypes.string,
     inputType: PropTypes.string,
+    maxLength: PropTypes.number
 }
