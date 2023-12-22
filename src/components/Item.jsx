@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from "react-redux"
-import { deleteTodo, startEditTodo, completeTodo, setIsEdit } from "../redux/slice/todo-slice";
+import { deleteTodo, startEditTodo, completeTodo } from "../redux/slice/todo-slice";
 import editIcon from '../assets/edit.png';
 import deleteIcon from '../assets/delete.png'
 
@@ -12,8 +12,8 @@ export default function Item (props) {
 
     const handleDeleteTodo = (id) => {
         dispatch(deleteTodo(id));
-        dispatch(setIsEdit(false));
     }
+    
     const handleEditTodo = (id, value) => {
         dispatch(startEditTodo({ id, value }));
     }
@@ -21,6 +21,7 @@ export default function Item (props) {
     const handleComplete = (id) => {
         dispatch(completeTodo({id}));
     }
+
     return(
         <div className="todo-content mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
             <div className="item-todo bg-white mt-5 w-full flex items-center">
@@ -34,7 +35,7 @@ export default function Item (props) {
                     }}>{editedTodo ? editedTodo.value : props.value}</p>
                 <div className="icon-items flex justify-end flex-grow mr-4">
                     <button onClick={() => handleEditTodo (props.id, props.value)}><img src={editIcon} className="mr-4 w-10" style={{display: props.completed ? 'none' : 'block'}}/></button>
-                    <button onClick={() => handleDeleteTodo(props.id)}><img src={deleteIcon} className="w-8" style={{ display: isEdit ? 'none' : 'block' }}/></button>
+                    <button onClick={() => handleDeleteTodo(props.id)}><img src={deleteIcon} className="w-8" style={{display: isEdit ? 'none' : 'block'}}/></button>
                 </div>
             </div>
         </div>

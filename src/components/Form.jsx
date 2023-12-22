@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { addTodo, editTodo, cancelEdit, setIsEdit, finishEditTodo, inputLength, setInputValue } from '../redux/slice/todo-slice'
+import { addTodo, editTodo, cancelEdit, finishEditTodo, inputLength, setInputValue } from '../redux/slice/todo-slice'
 import './component.css'
 
 export default function Form (props){
@@ -30,8 +30,8 @@ export default function Form (props){
 
     const handleCancelEdit = () => {
         dispatch(cancelEdit());
-        dispatch(setIsEdit(false));
         dispatch(setInputValue(''));
+        dispatch(inputLength(0))
     }
 
     const handleInputLength = (event) => {
