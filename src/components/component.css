@@ -1,0 +1,77 @@
+.btn-filter{
+    border: 2px solid black;
+    border-radius: 14px;
+    background-color: white;
+}
+.item-todo{
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.input-todo{
+    border: 2px solid black;
+    border-radius: 14px;
+}
+.btn-todo{
+    border-radius: 14px;
+}
+.btn-todo:hover{
+    background-color: #FFFAF0;
+    color: black;
+}
+.item-todo button i {
+    font-size: 2.5em;
+    transition: transform 0.1s ease-in-out
+}
+.item-todo button i:hover {
+    font-size: 2.5em;
+    transform: scale(1.1)
+}
+.item-todo p{
+    text-decoration-thickness: 5px;
+}
+.item-todo label{
+    position: relative;
+    width: 25px;
+    height: 25px;
+}
+.item-todo label input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+}
+.item-todo label span{
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    border: 2px solid black;
+    cursor: pointer;
+}
+.item-todo label span::after{
+    content: '';
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+    width: 0;
+    height: 0;
+    border: solid black;
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+input:checked ~ span::after{
+    width: 12px;
+    height: 22px;
+    opacity: 1;
+}
+@media (max-width: 575.98px) {
+    .todo h1 {
+        font-size: 1.75rem;
+    }
+    .button-edit button{
+        font-size: 1rem;
+        padding: 5px 12px 5px 12px;
+    }
+} 
+

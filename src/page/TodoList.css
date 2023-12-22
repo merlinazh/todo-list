@@ -1,0 +1,8 @@
+
+.todo-list{
+    min-height: calc(100vh - 200px);
+    background-color: #FFFAF0;
+    border-top: 2px solid black;
+    border-radius: 34px 34px 0 0;
+    padding-bottom: 20px;
+}

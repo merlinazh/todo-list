@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap');
+body{
+  font-family: 'sniglet';
+  background-color: #F9D1CB;
+  box-sizing: border-box;
+}
