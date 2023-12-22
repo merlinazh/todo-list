@@ -45,9 +45,6 @@ const todoSlice = createSlice({
         state.edit.value = '';
       }
     },
-    setIsEdit(state, action) {
-      state.edit.isEdit = action.payload;
-    },
     cancelEdit(state){
       state.edit.id = null;
       state.edit.value = '';
@@ -69,5 +66,5 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, deleteTodo, editTodo, startEditTodo, finishEditTodo, setIsEdit, cancelEdit, completeTodo, inputLength, setInputValue } = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo, startEditTodo, finishEditTodo, cancelEdit, completeTodo, inputLength, setInputValue } = todoSlice.actions;
 export default todoSlice.reducer;
